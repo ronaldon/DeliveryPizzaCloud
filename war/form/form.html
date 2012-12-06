@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Delivery Pizza Cloud</title>
+	<link rel="stylesheet" type="text/css" href="form/view.css" media="all"/>
+	
+	<script type="text/javascript" src="form/view.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script>
+		function realizarPedido() {
+			
+			$('#loading').show();
+			$('#saveForm').hide();
+			
+			$.ajax({
+				url: '/pizzadeliverycloud',
+				
+				data: {},
+				
+				success: function(data) {
+					$('#loading').hide();
+					$('#msg_sucesso').show();
+					$('#msg_sucesso').html(data);
+				},
+				
+				error: function() {
+					$('#loading').hide();
+					$('#msg_erro').show();
+				}
+			});
+		}
+
+	</script>	
+	
+</head>
+<body id="main_body">
+
+	<img id="top" src="form/top.png" alt=""/>
+		<div id="form_container">
+			
+			<h1><a>Delivery Pizza Cloud</a></h1>
+			<form id="formPedido" class="appnitro" method="post" action="javascript: realizarPedido();">
+				<div class="form_description">
+				
+					<h2>Delivery Pizza Cloud</h2>
+					<p>Faça seu pedido</p>
+				</div>
+				<ul>
+
+					<li id="li_1"><label class="description" for="element_1">Nome
+					</label> <span> <input id="element_1_1" name="element_1_1"
+							class="element text" maxlength="255" size="8" value="" /> <label>Nome</label>
+					</span> <span> <input id="element_1_2" name="element_1_2"
+							class="element text" maxlength="255" size="14" value="" /> <label>Sobrenome</label>
+					</span></li>
+					<li id="li_3"><label class="description" for="element_3">Endereço
+					</label>
+						<div>
+							<input id="element_3" name="element_3" class="element text large"
+								type="text" maxlength="255" value="" />
+						</div>
+						<p class="guidelines" id="guide_3">
+							<small>Exemplo: Rua General Osorio, 340</small>
+						</p></li>
+					<li id="li_4"><label class="description" for="element_4">Bairro
+					</label>
+						<div>
+							<input id="element_4" name="element_4"
+								class="element text medium" type="text" maxlength="255" value="" />
+						</div></li>
+					<li id="li_2"><label class="description" for="element_2">Telefone
+					</label> <span> <input id="element_2_1" name="element_2_1"
+							class="element text" size="3" maxlength="3" value="" type="text"/>
+								- <label for="element_2_1">(###)</label></span> <span> <input
+							id="element_2_2" name="element_2_2" class="element text" size="3"
+							maxlength="3" value="" type="text"/> - <label
+								for="element_2_2">###</label></span> <span> <input
+							id="element_2_3" name="element_2_3" class="element text" size="4"
+							maxlength="4" value="" type="text"/> <label
+								for="element_2_3">####</label></span></li>
+					<li id="li_5"><label class="description" for="element_5">Escolha
+							sua Pizza </label>
+						<div>
+							<select class="element select medium" id="element_5"
+								name="element_5">
+								<option value="" selected="selected"></option>
+								<option value="1">Mussarela</option>
+								<option value="2">Marguerita</option>
+								<option value="3">Romana</option>
+								<option value="4">Quatro Queijos</option>
+								<option value="5">Peito de Peru</option>
+								<option value="6">Frango</option>
+								<option value="7">Lombinho</option>
+
+							</select>
+						</div></li>
+					<li id="li_6"><label class="description" for="element_6">Tipo
+							de pagamento </label> <span> <input id="element_6_1"
+							name="element_6" class="element radio" type="radio" value="1" />
+							<label class="choice" for="element_6_1">Cartão de Cédito</label>
+							<input id="element_6_2" name="element_6" class="element radio"
+							type="radio" value="2" /> <label class="choice"
+							for="element_6_2">On-Line</label> <input id="element_6_3"
+							name="element_6" class="element radio" type="radio" value="3" />
+							<label class="choice" for="element_6_3">Dinheiro</label>
+
+					</span></li>
+					
+					<li class="buttons">
+						<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+						
+						<div id="loading" style="display: none;">	
+							<img src="form/ajax-loader.gif"></img>
+						</div>
+						
+						<div id="msg_sucesso" style="display: none;"></div>
+						
+					</li>
+						
+					
+			
+				</ul>
+			</form>
+			
+			
+			
+			
+			
+			<div id="msg_erro" style="display: none;">
+				Desculpe ocorreu um erro, tente novamente!
+			</div>
+			
+		</div> 
+		<img id="bottom" src="form/bottom.png" alt=""/>
+</body>
+</html>

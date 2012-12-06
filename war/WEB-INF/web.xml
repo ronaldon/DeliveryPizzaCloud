@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"	
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+	<context-param>
+	    <param-name>pizzaList</param-name>
+	    <param-value>
+			Calabresa | Calebresa com cebola | 19.90;
+			Frango | Frango com catupery | 29.90;
+			Lombinho| Lombinho, catupery e cebola | 32.90;
+			A Moda da Casa| Tomate, queijo mussarela, ovo e presunto| 19.90;
+			Palmito | Palmito e mussarela | 34.90;
+			Romana | Presuto e queijo | 21.90;
+			Marguerita | Mussarela e mangerição | 17.90;
+			Quatro queijos | Mussarela, catupery, gorgonsola e cheader | 23.90;
+			Portuguesa | Presunto e ovo | 21.90;
+			Mussarela | Queijo Mussarela | 16.90
+		</param-value>
+	</context-param>
+
+	<listener>
+		<description>Inicializa o contexto da aplicacao</description>
+	  	<listener-class>br.com.pizzadeliverycloud.startup.Startup</listener-class>
+	  	
+	</listener>
+
+	<!--====================================================================================-->
+	<servlet>
+		<servlet-name>AuthenticationService</servlet-name>
+		<servlet-class>br.com.pizzadeliverycloud.authentication.AuthenticationServiceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AuthenticationService</servlet-name>
+		<url-pattern>/authService</url-pattern>
+	</servlet-mapping>
+	
+	<!--====================================================================================-->
+	<servlet>
+		<servlet-name>PedidoControllerServlet</servlet-name>
+		<servlet-class>br.com.pizzadeliverycloud.PedidoControllerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PedidoControllerServlet</servlet-name>
+		<url-pattern>/pedidoService</url-pattern>
+	</servlet-mapping>
+ 
+ 	<!--====================================================================================-->
+	<filter>
+		<filter-name>AutenticationFilter</filter-name>
+		<filter-class>br.com.pizzadeliverycloud.authentication.AutenticationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AutenticationFilter</filter-name>
+		<url-pattern>/pedidoService*</url-pattern>
+	</filter-mapping>
+
+	<!--====================================================================================-->
+	<filter>
+		<filter-name>UserSessionFilter</filter-name>
+		<filter-class>br.com.pizzadeliverycloud.authentication.UserSessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UserSessionFilter</filter-name>
+		<url-pattern>/form/*</url-pattern>
+	</filter-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>form/index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
